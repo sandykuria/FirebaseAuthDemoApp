@@ -46,6 +46,23 @@ class AuthViewModel: ViewModel() {
             }
 
     }
+    fun signup(email : String,password : String){
+        if (email.isEmpty() || password.isEmpty()){
+            _authState.value=  AuthState.Error ("Fields cannot be left blank")
+            return
+        }
+        _authState.value = AuthState.Loading
+        auth.createUserWithEmailAndPassword(email,password) //  Adding a new user
+            .addOnCompleteListener{task ->
+                if (task.isSuccessful){
+                    _authState.value = AuthState.Authenticated
+                }else {
+                    _authState.value=  AuthState.Error (task.exception?.message?:"An unexpected error occured")
+
+                }
+            }
+
+    }
 
 }
 
