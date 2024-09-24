@@ -58,11 +58,16 @@ class AuthViewModel: ViewModel() {
                     _authState.value = AuthState.Authenticated
                 }else {
                     _authState.value=  AuthState.Error (task.exception?.message?:"An unexpected error occured")
-
                 }
             }
 
     }
+    //Sign out the user
+    fun signout (){
+        auth.signOut()
+        _authState.value = AuthState.Unauthenticated //Whenever user is logged out, it will be unauthenticated
+    }
+
 
 }
 
