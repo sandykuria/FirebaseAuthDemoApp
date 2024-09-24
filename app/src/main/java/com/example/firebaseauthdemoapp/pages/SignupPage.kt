@@ -82,7 +82,8 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
 
         Button(onClick = {
             authViewModel.signup(email, password)
-        }) {
+        }, enabled = authState.value != AuthState.Loading
+            ) {
             Text(text = "Create Account")
         }
         Spacer(modifier = Modifier.height(8.dp))
